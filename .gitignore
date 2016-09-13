@@ -19,15 +19,15 @@ coverage
 # Dependency directory
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-/node_modules/
-/typings/
+node_modules/
+typings/
 
 # Users Environment Variables
 .lock-wscript
 .tsdrc
 .typingsrc
 
-/tools/**/*.js
+tools/**/*.js
 dist
 dev
 docs
