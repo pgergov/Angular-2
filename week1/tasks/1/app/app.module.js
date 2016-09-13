@@ -11,15 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./components/app.component/app.component');
-var wordGame_component_1 = require('./components/wordGame.component/wordGame.component');
+var word_game_component_1 = require('./components/word-game.component/word-game.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.App, wordGame_component_1.WordGame],
-            bootstrap: [app_component_1.App, wordGame_component_1.WordGame]
+            declarations: [app_component_1.App, word_game_component_1.WordGame],
+            bootstrap: [app_component_1.App, word_game_component_1.WordGame]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

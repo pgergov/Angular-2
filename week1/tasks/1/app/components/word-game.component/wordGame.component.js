@@ -22,7 +22,7 @@ var WordGame = (function () {
     }
     ;
     WordGame.prototype.pickLetter = function () {
-        alert("test");
+        alert("test1");
     };
     WordGame.prototype.generateRandomWord = function () {
         var wordsLength = this.data.words.length;
@@ -106,8 +106,8 @@ var WordGame = (function () {
     WordGame = __decorate([
         core_1.Component({
             selector: 'word-game',
-            templateUrl: 'app/components/wordGame.component/wordGame.component.html',
-            styleUrls: ['app/components/wordGame.component/wordGame.component.css']
+            templateUrl: 'app/components/word-game.component/word-game.component.html',
+            styleUrls: ['app/components/word-game.component/word-game.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], WordGame);

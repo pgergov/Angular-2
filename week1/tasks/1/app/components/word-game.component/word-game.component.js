@@ -1,121 +1,117 @@
-import { Component } from '@angular/core';
-import { DataSource } from '../../dataSource';
-
-
-@Component({
-    selector: 'word-game',
-    templateUrl: 'app/components/wordGame.component/wordGame.component.html',
-    styleUrls: ['app/components/wordGame.component/wordGame.component.css']
-})
-export class WordGame{
-    data: DataSource;
-    randomWord: string;
-    randomNumber: number;
-    uniqueWordLetters: string[];
-    wordBank: string[];
-
-    constructor(){
-        this.data = new DataSource();
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var dataSource_1 = require('../../dataSource');
+var WordGame = (function () {
+    function WordGame() {
+        this.data = new dataSource_1.DataSource();
         this.randomWord = this.generateRandomWord();
         this.uniqueWordLetters = this.generateUniqueWordLettersArray(this.randomWord);
         this.randomNumber = this.generateRandomNumber();
         // Present the word with the hidden N random letters represented as `_`
         this.formatWord();
         this.wordBank = this.generateWordBank();
-    };
-
-    pickLetter() {
-        alert("test");
     }
-
-    protected generateRandomWord(): string{
+    ;
+    WordGame.prototype.pickLetter = function () {
+        alert("test");
+    };
+    WordGame.prototype.generateRandomWord = function () {
         var wordsLength = this.data.words.length;
         var randomWordsIndex = this.generateRandomNumberInInterval(0, wordsLength - 1);
-
         // Lowercase the word for simplicity
         return this.data.words[randomWordsIndex].toLowerCase();
     };
-
-    protected generateRandomNumber(): number{
+    ;
+    WordGame.prototype.generateRandomNumber = function () {
         return this.generateRandomNumberInInterval(0, this.uniqueWordLetters.length);
     };
-
-    private generateRandomNumberInInterval(min:number, max:number): number {
+    ;
+    WordGame.prototype.generateRandomNumberInInterval = function (min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     };
-
-    private generateUniqueWordLettersArray(str:string): string[] {
+    ;
+    WordGame.prototype.generateUniqueWordLettersArray = function (str) {
         var result = [];
-
-        for (let i = 0; i < str.length; i++) {
+        for (var i = 0; i < str.length; i++) {
             var element = str[i];
-
             // Check if the element is letter from the alphabet
             if (!element.match(/[a-z]/)) {
                 continue;
-            };
-
+            }
+            ;
             if (result.indexOf(element) < 0) {
                 result.push(element);
-            };
-
-        };
-
+            }
+            ;
+        }
+        ;
         return result;
     };
-
-    private generateRandomLettersArray(arr:string[]): string[] {
+    ;
+    WordGame.prototype.generateRandomLettersArray = function (arr) {
         var result = [];
         // Clone the letters array and return reference to the new array
         var deepClonedArr = arr.slice();
         var arrLength = deepClonedArr.length;
-
-        for (let i = 1; i <= this.randomNumber; i++) {
-            var randomIndex = this.generateRandomNumberInInterval(0, arrLength - 1)
+        for (var i = 1; i <= this.randomNumber; i++) {
+            var randomIndex = this.generateRandomNumberInInterval(0, arrLength - 1);
             // Pop letter with the random index
             var letterToBeHidden = deepClonedArr.splice(randomIndex, 1)[0];
             result.push(letterToBeHidden);
             // Decrease alphabet's length because of the pop
             arrLength--;
         }
-
         return result;
     };
-
-    private formatWord() {
+    ;
+    WordGame.prototype.formatWord = function () {
         var lettersToBeHiddenArray = this.generateRandomLettersArray(this.uniqueWordLetters);
-
         var result = '';
-        for (let i = 0; i < this.randomWord.length; i++) {
+        for (var i = 0; i < this.randomWord.length; i++) {
             var element = this.randomWord[i];
-
             if (lettersToBeHiddenArray.indexOf(element.toLowerCase()) > -1) {
                 result += '_';
-            } else {
+            }
+            else {
                 result += element;
             }
         }
-
         this.randomWord = result;
     };
-
-    private generateWordBank() {
+    ;
+    WordGame.prototype.generateWordBank = function () {
         if (this.uniqueWordLetters.length + this.randomNumber >= 26) {
             return this.data.alphabet;
         }
-
         var availableLetters = [];
-
-        for (let i = 0; i < this.data.alphabet.length; i++) {
+        for (var i = 0; i < this.data.alphabet.length; i++) {
             var letter = this.data.alphabet[i];
-
             if (this.uniqueWordLetters.indexOf(letter) < 0) {
                 availableLetters.push(letter);
             }
         }
-
         var extraLetters = this.generateRandomLettersArray(availableLetters);
-
         return this.uniqueWordLetters.concat(extraLetters);
     };
-}
+    ;
+    WordGame = __decorate([
+        core_1.Component({
+            selector: 'word-game',
+            templateUrl: 'app/components/word-game.component/word-game.component.html',
+            styleUrls: ['app/components/word-game.component/word-game.component.css']
+        }), 
+        __metadata('design:paramtypes', [])
+    ], WordGame);
+    return WordGame;
+}());
+exports.WordGame = WordGame;
+//# sourceMappingURL=word-game.component.js.map
