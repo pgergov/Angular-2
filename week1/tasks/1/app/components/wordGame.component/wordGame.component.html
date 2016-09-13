@@ -1,0 +1,8 @@
+<div>Word: {{ randomWord }}</div>
+<br>
+<div> Number: {{ randomNumber }}</div>
+<br>
+<ul class="myUl" *ngFor="let letter of wordBank">
+  <li class="myLi"> <button (click)="pickLetter()">{{ letter }}</button> </li>
+</ul>
+<br>

@@ -4,7 +4,8 @@ import { DataSource } from '../../dataSource';
 
 @Component({
     selector: 'word-game',
-    template: '<div>Word: {{ randomWord }}, Number: {{ randomNumber }}, Word Bank: {{ wordBank }}</div>'
+    templateUrl: 'app/components/wordGame.component/wordGame.component.html',
+    styleUrls: ['app/components/wordGame.component/wordGame.component.css']
 })
 export class WordGame{
     data: DataSource;
@@ -22,6 +23,10 @@ export class WordGame{
         this.formatWord();
         this.wordBank = this.generateWordBank();
     };
+
+    pickLetter() {
+        alert("test");
+    }
 
     protected generateRandomWord(): string{
         var wordsLength = this.data.words.length;

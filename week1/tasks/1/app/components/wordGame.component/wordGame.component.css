@@ -1,0 +1,11 @@
+.myUl {
+    list-style-type: none;
+    margin:0px;
+    padding:0px;
+}
+
+.myLi {
+    display:inline;
+    float:left;
+    margin-right: 5px;
+}

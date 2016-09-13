@@ -21,6 +21,9 @@ var WordGame = (function () {
         this.wordBank = this.generateWordBank();
     }
     ;
+    WordGame.prototype.pickLetter = function () {
+        alert("test");
+    };
     WordGame.prototype.generateRandomWord = function () {
         var wordsLength = this.data.words.length;
         var randomWordsIndex = this.generateRandomNumberInInterval(0, wordsLength - 1);
@@ -103,7 +106,8 @@ var WordGame = (function () {
     WordGame = __decorate([
         core_1.Component({
             selector: 'word-game',
-            template: '<div>Word: {{ randomWord }}, Number: {{ randomNumber }}, Word Bank: {{ wordBank }}</div>'
+            templateUrl: 'app/components/wordGame.component/wordGame.component.html',
+            styleUrls: ['app/components/wordGame.component/wordGame.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], WordGame);
