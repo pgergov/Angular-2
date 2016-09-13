@@ -14,21 +14,96 @@ var WordGame = (function () {
     function WordGame() {
         this.data = new dataSource_1.DataSource();
         this.randomWord = this.generateRandomWord();
+        this.uniqueWordLetters = this.generateUniqueWordLettersArray(this.randomWord);
         this.randomNumber = this.generateRandomNumber();
+        // Present the word with the hidden N random letters represented as `_`
+        this.formatWord();
+        this.wordBank = this.generateWordBank();
     }
     ;
     WordGame.prototype.generateRandomWord = function () {
-        return this.data.words[0];
+        var wordsLength = this.data.words.length;
+        var randomWordsIndex = this.generateRandomNumberInInterval(0, wordsLength - 1);
+        // Lowercase the word for simplicity
+        return this.data.words[randomWordsIndex].toLowerCase();
     };
     ;
     WordGame.prototype.generateRandomNumber = function () {
-        return 42;
+        return this.generateRandomNumberInInterval(0, this.uniqueWordLetters.length);
+    };
+    ;
+    WordGame.prototype.generateRandomNumberInInterval = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    ;
+    WordGame.prototype.generateUniqueWordLettersArray = function (str) {
+        var result = [];
+        for (var i = 0; i < str.length; i++) {
+            var element = str[i];
+            // Check if the element is letter from the alphabet
+            if (!element.match(/[a-z]/)) {
+                continue;
+            }
+            ;
+            if (result.indexOf(element) < 0) {
+                result.push(element);
+            }
+            ;
+        }
+        ;
+        return result;
+    };
+    ;
+    WordGame.prototype.generateRandomLettersArray = function (arr) {
+        var result = [];
+        // Clone the letters array and return reference to the new array
+        var deepClonedArr = arr.slice();
+        var arrLength = deepClonedArr.length;
+        for (var i = 1; i <= this.randomNumber; i++) {
+            var randomIndex = this.generateRandomNumberInInterval(0, arrLength - 1);
+            // Pop letter with the random index
+            var letterToBeHidden = deepClonedArr.splice(randomIndex, 1)[0];
+            result.push(letterToBeHidden);
+            // Decrease alphabet's length because of the pop
+            arrLength--;
+        }
+        return result;
+    };
+    ;
+    WordGame.prototype.formatWord = function () {
+        var lettersToBeHiddenArray = this.generateRandomLettersArray(this.uniqueWordLetters);
+        var result = '';
+        for (var i = 0; i < this.randomWord.length; i++) {
+            var element = this.randomWord[i];
+            if (lettersToBeHiddenArray.indexOf(element.toLowerCase()) > -1) {
+                result += '_';
+            }
+            else {
+                result += element;
+            }
+        }
+        this.randomWord = result;
+    };
+    ;
+    WordGame.prototype.generateWordBank = function () {
+        if (this.uniqueWordLetters.length + this.randomNumber >= 26) {
+            return this.data.alphabet;
+        }
+        var availableLetters = [];
+        for (var i = 0; i < this.data.alphabet.length; i++) {
+            var letter = this.data.alphabet[i];
+            if (this.uniqueWordLetters.indexOf(letter) < 0) {
+                availableLetters.push(letter);
+            }
+        }
+        var extraLetters = this.generateRandomLettersArray(availableLetters);
+        return this.uniqueWordLetters.concat(extraLetters);
     };
     ;
     WordGame = __decorate([
         core_1.Component({
             selector: 'word-game',
-            template: '<div>Word: {{ randomWord }}, Number: {{ randomNumber }}</div>'
+            template: '<div>Word: {{ randomWord }}, Number: {{ randomNumber }}, Word Bank: {{ wordBank }}</div>'
         }), 
         __metadata('design:paramtypes', [])
     ], WordGame);
